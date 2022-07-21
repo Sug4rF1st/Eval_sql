@@ -56,7 +56,8 @@ INNER JOIN `order details` ON orders.OrderID = `order details`.OrderID
 INNER JOIN products ON `order details`.ProductID = products.ProductID
 INNER JOIN suppliers ON products.SupplierID = suppliers.SupplierID
 WHERE upper(suppliers.CompanyName) = 'Exotic Liquids'
-GROUP BY pays
+GROUP BY orders.ShipCountry
+ORDER BY orders.ShipCountry
 ;
 
 /* Exercice 7 - Chiffre d'affaires global sur les ventes de 1997 : */
@@ -78,7 +79,7 @@ GROUP BY MONTH(OrderDate);
 
 /* Exercice 9 - A quand remonte la dernière commande du client nommé "Du monde entier" ? */
 
-SELECT MAX(orders.OrderDAte) AS "Date de dernière commande"
+SELECT MAX(orders.OrderDate) AS "Date de dernière commande"
 FROM orders
 INNER JOIN customers ON orders.CustomerID = customers.CustomerID
 WHERE UPPER(customers.CompanyName) = "Du monde entier"
